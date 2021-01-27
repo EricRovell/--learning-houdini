@@ -1,0 +1,1 @@
+Implementing the "ripple" effect used in Material Design with CSS Paint API.

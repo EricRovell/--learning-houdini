@@ -1,0 +1,33 @@
+body {
+  font-family: sans-serif, Arial, Helvetica;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f8f8f8;
+}
+
+button:focus {
+  outline: none;
+}
+
+.ripple {
+  font-size: 2em;
+  padding: 12px 24px;
+  border: 0;
+  color: white;
+  cursor: pointer;
+  --ripple-x: 0;
+  --ripple-y: 0;
+  --ripple-speed: 1.0;
+  --animation-tick: 0;
+}
+
+.ripple.animating {
+  background-image: paint(ripple);
+}
+
+.ripple {
+  background-color: var(--ripple-background);
+  --ripple-speed: 2.75;
+}

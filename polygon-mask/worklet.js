@@ -6,6 +6,15 @@ class Polygon {
       "--polygon-rotate"
     ];
   }
+  
+  *vertices(sides, scale, angle) {
+    for (let i = 0; i < sides; i++) {
+      yield [
+        scale * Math.cos(angle + 2 * Math.PI * i / sides),
+        scale * Math.sin(angle + 2 * Math.PI * i / sides)
+      ];
+    }
+  }
 
   paint(context, geometry, properties) {
     const sides = properties.get("--polygon-sides").toString();
@@ -22,19 +31,13 @@ class Polygon {
     context.translate(geometry.width / 2, geometry.height / 2);
     context.rotate(angle * Math.PI / 180);
     context.translate(-geometry.width / 2, -geometry.height / 2);
+    
+    const vertices = this.vertices(sides, radius, angle);
 
     context.beginPath();
-
-    let x = origin.x + radius * Math.cos(2 * Math.PI * 0 / sides);
-    let y = origin.y + radius * Math.sin(2 * Math.PI * 0 / sides);
-    context.moveTo(x, y);
-
-    for (let i = 1; i <= sides; i++) {
-      x = origin.x + radius * Math.cos(2 * Math.PI * i / sides);
-      y = origin.y + radius * Math.sin(2 * Math.PI * i / sides);
-      context.lineTo(x,y);
+    for (let [ x, y ] of vertices) {
+      context.lineTo(origin.x + x, origin.y + y);
     }
-
     context.closePath();
     
     context.fillStyle = "black";

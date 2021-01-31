@@ -1,0 +1,47 @@
+body {
+  background-color: rgb(18, 21, 23);
+  color: hsl(0, 100%, 100%);
+  font-size: 16px;
+}
+
+main {
+  display: grid;
+  place-items: center;
+}
+
+#masked {
+  --superellipse-n: 2;
+  --superellipse-radius-x: 85%;
+  --superellipse-radius-y: 85%;
+  
+  width: 450px;
+  height: 450px;
+  background: url(bg.jpg);
+  background-size: cover;
+  
+  margin: 50px auto;
+  border-radius: 50%;
+}
+
+@supports (background: paint(polygon-mask)) {
+  #masked {
+    border-radius: 0;
+    mask-image: paint(polygon-mask);
+    -webkit-mask-image: paint(polygon-mask);
+  }
+}
+
+.control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  margin-left: 0.75em;
+}
+
+.not-supported {
+  font-size: 28px;
+  color: hsl(14, 80%, 48%);
+}
